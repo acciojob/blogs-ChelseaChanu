@@ -15,19 +15,16 @@ public class ImageService {
     @Autowired
     ImageRepository imageRepository2;
 
-    public Image addImage(Integer blogId, String description, String dimensions){
+    public Image addImage(Blog blog, String description, String dimensions){
         //add an image to the blog
         Image image = new Image();
-        Blog blog = blogRepository2.findById(blogId).get();
-        if(blog!=null){
-            image.setDescription(description);
-            image.setDimensions(dimensions);
-            List<Image> listOfImage = blog.getImageList();
-            listOfImage.add(image);
-            blog.setImageList(listOfImage);
-            image.setBlog(blog);
-            imageRepository2.save(image);
-        }
+        image.setDescription(description);
+        image.setDimensions(dimensions);
+        List<Image> listOfImage = blog.getImageList();
+        listOfImage.add(image);
+        blog.setImageList(listOfImage);
+        image.setBlog(blog);
+        imageRepository2.save(image);
         return image;
     }
 
