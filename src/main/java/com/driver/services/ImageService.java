@@ -20,9 +20,9 @@ public class ImageService {
         Image image = new Image(description, dimensions);
         Blog blog = blogRepository2.findById(blogId).get();
         if(blog!=null){
-            List<Image> listOfImage = blog.getListofImages();
+            List<Image> listOfImage = blog.getImageList();
             listOfImage.add(image);
-            blog.setListofImages(listOfImage);
+            blog.setImageList(listOfImage);
             blogRepository2.save(blog);
         }
         return image;
