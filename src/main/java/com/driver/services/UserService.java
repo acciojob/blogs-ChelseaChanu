@@ -17,7 +17,7 @@ public class UserService {
     }
 
     public void deleteUser(int userId){
-        userRepository3.deleteById(id);;
+        userRepository3.deleteById(userId);
     }
 
     public User updateUser(Integer id, String password){
