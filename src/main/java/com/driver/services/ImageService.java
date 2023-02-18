@@ -23,16 +23,14 @@ public class ImageService {
             List<Image> listOfImage = blog.getImageList();
             listOfImage.add(image);
             blog.setImageList(listOfImage);
+            imageRepository2.save(image);
             blogRepository2.save(blog);
         }
         return image;
     }
 
     public void deleteImage(Integer id){
-        Image image = imageRepository2.findById(id).get();
-        if(image!=null){
-            imageRepository2.deleteById(id);
-        }
+        imageRepository2.deleteById(id);
     }
 
     public Integer countImagesInScreen(Integer id, String screenDimensions) {
