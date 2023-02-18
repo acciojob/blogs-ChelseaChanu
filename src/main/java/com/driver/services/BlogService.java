@@ -7,6 +7,7 @@ import com.driver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,10 +20,13 @@ public class BlogService {
 
     public Blog createAndReturnBlog(Integer userId, String title, String content) {
         //create a blog at the current time
-        Blog blog = new Blog(title, content);
+        Blog blog = new Blog();
         User user = userRepository1.findById(userId).get();
         if(user!=null){
             blog.setUser(user);
+            blog.setTitle(title);
+            blog.setContent(content);
+            blog.setPubDate(new Date());
             List<Blog> blogsWritten = user.getBlogList();
             blogsWritten.add(blog);
             user.setBlogList(blogsWritten);

@@ -17,9 +17,12 @@ public class ImageService {
 
     public Image addImage(Integer blogId, String description, String dimensions){
         //add an image to the blog
-        Image image = new Image(description, dimensions);
+        Image image = new Image();
         Blog blog = blogRepository2.findById(blogId).get();
         if(blog!=null){
+            image.setDescription(description);
+            image.setDimensions(dimensions);
+            image.setBlog(blog);
             List<Image> listOfImage = blog.getImageList();
             listOfImage.add(image);
             blog.setImageList(listOfImage);

@@ -14,8 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 @Entity
 @Table
 public class Blog{
@@ -24,7 +22,6 @@ public class Blog{
     private int id;
     private String title;
     private String content;
-    @CreationTimestamp
     private Date pubDate;
 
     public Blog() {
