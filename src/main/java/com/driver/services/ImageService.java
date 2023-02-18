@@ -17,15 +17,51 @@ public class ImageService {
 
     public Image addImage(Integer blogId, String description, String dimensions){
         //add an image to the blog
-
+        Image image = new Image(description, dimensions);
+        Blog blog = blogRepository2.findById(blogId).get();
+        if(blog!=null){
+            List<Image> listOfImage = blog.getListofImages();
+            listOfImage.add(image);
+            blog.setListofImages(listOfImage);
+            blogRepository2.save(blog);
+        }
+        return image;
     }
 
     public void deleteImage(Integer id){
-
+        Image image = imageRepository2.findById(id).get();
+        if(image!=null){
+            imageRepository2.deleteById(id);
+        }
     }
 
     public int countImagesInScreen(Integer id, String screenDimensions) {
         //Find the number of images of given dimensions that can fit in a screen having `screenDimensions`
+        Image image = imageRepository2.findById(id).get();
+        String dimensions = image.getDimensions();
 
+        int i = 0;
+        for(;i<screenDimensions.length();i++){
+            if(screenDimensions.charAt(i)=='X'){
+                break;
+            }
+        }
+
+        int j = 0;
+        for(;j<dimensions.length();j++){
+            if(dimensions.charAt(j)=='X'){
+                break;
+            }
+        }
+
+        int lenBigImg = Integer.parseInt(screenDimensions.substring(0,i));
+        int widBigImg = Integer.parseInt(screenDimensions.substring(i+1));
+        int lenSmallImg = Integer.parseInt(dimensions.substring(0,j));
+        int widSmallImg = Integer.parseInt(dimensions.substring(j+1));
+
+        int dim1 = lenBigImg/lenSmallImg;
+        int dim2 = widBigImg/widSmallImg;
+
+        return dim1*dim2;
     }
 }
