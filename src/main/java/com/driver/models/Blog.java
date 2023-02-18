@@ -38,7 +38,7 @@ public class Blog{
 
     //mapping with image
     @OneToMany(mappedBy = "blog", cascade = CascadeType.ALL)
-    List<Image> listofImages = new ArrayList<>();
+    List<Image> imageList = new ArrayList<>();
     
     public Blog(String title, String content) {
         this.title = title;
@@ -85,11 +85,11 @@ public class Blog{
         this.user = user;
     }
 
-    public List<Image> getListofImages() {
-        return listofImages;
+    public List<Image> getImageList() {
+        return imageList;
     }
 
-    public void setListofImages(List<Image> listofImages) {
-        this.listofImages = listofImages;
-    }  
+    public void setImageList(List<Image> imageList) {
+        this.imageList = imageList;
+    } 
 }
